@@ -47,7 +47,7 @@
         <!--E:top header-->
 
         <!--S:header-->
-      
+
         <!--E:header-->
         <!--S:mainbody-->
         <div id="mainwrapper">
@@ -55,6 +55,14 @@
             <div id="maintop" class="container">
 
             </div>
+            <!--E: maintop-->
+            <!--S: mainbody-->
+            <div id="mainbody" class="container" style="height: 375px">
+                <div style="margin: 80px">
+                    <p style="text-align: center; font-size: large">Tài khoản của bạn đã được kích hoạt, vui lòng đăng nhập để sử dụng</p>
+                </div>
+            </div>
+            <!--E: mainbody-->
         </div>
         <!--E:mainbody-->
 

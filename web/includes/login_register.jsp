@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<c:set var="reg" value="${param.register}" />
+<c:set var="reg" value="${param.reg}" />
 <c:if test="${reg == 'success'}">
     <script>alert("Ban dang ky thanh cong, vui long vao mail de active");</script>
 </c:if>
@@ -135,7 +135,7 @@
 <!--S:LogModal-->
 <div class="modal fade" id="LogModal" tabindex="-1" role="dialog" aria-labelledby="LogModal" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="UserServlet?ac=login" method="POST" session="scope">
+        <form action="UserServlet?ac=login" method="POST" scope="session">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -144,21 +144,21 @@
                 <div class="modal-body">		      	
                     <div class="form-group">
                         <label for="InputUserName">Tên đăng nhập</label>
-                        <input type="email" class="form-control" id="InputUserName" placeholder="Enter email">
+                        <input name="txtUser" type="text" class="form-control" id="InputUserName" placeholder="Username" required="true">
                     </div>
                     <div class="form-group">
                         <label for="InputPassword">Mật khẩu</label>
-                        <input type="password" class="form-control" id="InputPassword" placeholder="Password">
+                        <input name="txtPass" type="password" class="form-control" id="InputPassword" placeholder="Password" required="true">
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> Ghi nhớ đăng nhập
+                            <input name="cbRemember" type="checkbox"> Ghi nhớ đăng nhập
                         </label>
                     </div>						      				      
                 </div>
                 <div class="modal-footer">	      	
                     <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
-                    <button type="button" class="btn btn-warning">Đăng nhập</button>
+                    <button type="submit" class="btn btn-warning">Đăng nhập</button>
                 </div>
             </div>
         </form>

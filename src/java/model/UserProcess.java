@@ -28,7 +28,7 @@ public class UserProcess {
     }
 
     public boolean checkLogin(String user, String pass) {
-        String sql = "SELECT * FROM tblUser WHERE Username=? and Password=? and CodeActive = null";
+        String sql = "SELECT * FROM tblUser WHERE Username=? and Password=?";
         try {
             PreparedStatement prst = conn.prepareStatement(sql);
             prst.setString(1, user);
@@ -125,7 +125,7 @@ public class UserProcess {
 
     public static void main(String[] args) {
         UserProcess up = new UserProcess();
-
+        System.out.println("+ "+up.checkLogin("user1", "123456"));
     }
 
 }

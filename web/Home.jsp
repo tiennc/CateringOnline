@@ -182,58 +182,19 @@
                     <!--E:news-->
                 </section>
                 <!--E:maincontent -->
-                <!--                S:sidebar 
-                                <aside id="sidebar" class="">
-                                    <div id="sticker" class="module adv">
-                                         S: Filter 
-                                        <div id="fillter" class="module categories">
-                                            <form>	
-                                                S: all by category 
-                                                <div class="box">
-                                                    <h4>Danh mục sản phẩm</h4>
-                                                    <div class="content">
-                                                        <ul class="child-category">
-                <c:forEach var="i" begin="1" end="5">
-                    <li class="current">
-                        <a href="category.html" style="font-size: large">${i}</a>
-                    </li>  
-                </c:forEach>                           
-            </ul>
-        </div>
-    </div>
-    E: all by category 
-</form>
-</div>
-E: Filter 
-</div>
-</aside>
-E:sidebar -->
 
                 <!--S:sidebar -->
                 <aside id="sidebar" class="w200">
-                    <!-- S: Filter -->
-                    <div id="fillter" class="module categories">
-                        <form>	
-                            <!--S: all by category -->
-                            <div class="box">
-                                <h4 style="font-size: 20px">Danh mục sản phẩm</h4>
-                                <div class="content">
-                                    <ul class="child-category">
-                                        <jsp:useBean id="categoryName" class="model.ProductProcess" scope="session"/>
-                                        <c:forEach var="i" items="${categoryName.listNameCategory}">
-                                            <li class="">
-                                                <a href="category.html" style="font-size: large">
-                                                    ${i}
-                                                </a>
-                                            </li>  
-                                        </c:forEach>                           
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--E: all by category -->
-                        </form>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active" style="background-color: #EA7373;">
+                            <h4>Danh mục thực đơn</h4>
+                        </a>
+                        <c:forEach var="i" items="${categoryName.listNameCategory}">
+                            <a href="#" class="list-group-item" style="height: 100px">
+                                <img src="https://wgom.org/wp-content/uploads/2015/02/active-tag-happy-birthday-HBD16.png" style="height: 60px; width: auto"><br/>
+                                ${i}</a>
+                        </c:forEach>    
                     </div>
-                    <!-- E: Filter -->
                 </aside>
                 <!--E:sidebar -->
 

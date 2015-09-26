@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.SendEmail;
 import model.UserProcess;
 
@@ -41,24 +43,57 @@ public class UserServlet extends HttpServlet {
 
         UserProcess db = new UserProcess();
         String ac = request.getParameter("ac");
+
+        if (ac.equals("login")) {
+
+            String u = request.getParameter("txtUser");
+            String p = request.getParameter("txtPass");
+            if (request.getParameter("cbRemember") != null) {
+                String[] cookieNames = {"user", "pass", "cb"};
+                String[] cookieValues = {u.toString(), p.toString(), "ok"};
+                for (int i = 0; i < cookieNames.length; i++) {
+                    Cookie cookie = new Cookie(cookieNames[i], cookieValues[i]);
+                    cookie.setMaxAge(30 * 24 * 60 * 60);
+                    response.addCookie(cookie);
+                }
+            }
+            if (db.checkLogin(u, p)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("login", u);
+                response.sendRedirect("Home.jsp");
+            } else {
+                response.sendRedirect("Error.jsp");
+            }
+        }
+
+        if (ac.equals("logout")) {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("login", null);
+            response.sendRedirect("Home.jsp");;
+
+        }
+
         if (ac.equals("register")) {
             String id = db.takeId("u", "UserId", "tblUser");
             String name = request.getParameter("username");
             String pass = request.getParameter("password");
             String email = request.getParameter("email");
-            int role = Integer.parseInt(request.getParameter("rbRole"));            
+            int role = Integer.parseInt(request.getParameter("rbRole"));
             String codeActive = UUID.randomUUID().toString();
             System.out.println("before if");
             if (db.registerUser(id, name, pass, email, role, codeActive)) {
                 SendEmail sm = new SendEmail();
                 sm.sendEmail(email, name, codeActive, id);
                 System.out.println("jush send email");
-                request.setAttribute("register", "success");
-                request.getRequestDispatcher("Home.jsp").forward(request, response);
-            }   else{
+//                request.setAttribute("register", "success");
+//                request.getRequestDispatcher("/Menu.jsp").forward(request, response);
+                response.sendRedirect("Home.jsp?register=success");
+                System.out.println("redirect");
+            } else {
                 response.sendRedirect("Error.jsp?id=" + id);
             }
-            
+
         }
     }
 

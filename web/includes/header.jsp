@@ -4,6 +4,7 @@
     Author     : Windows 10
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--S:top-->
@@ -107,17 +108,39 @@
                             </li>	
                             <li class="">
                                 <a href="about-common.html" title="about-common.html">Liên hệ quảng cáo</a>
-                            </li>		 								 				
+                            </li>	
+                            <c:if test="${not empty sessionScope.login}">
+                                <li class="">
+                                    <a href="UserServlet?ac=logout" title="logout">Đăng xuất</a>
+                                </li>
+                            </c:if>                          
                         </ul>
                     </div>
                     <!--E:subcategories-->		 			
                 </li>
-                <li>
-                    <a title="login" data-toggle="modal" data-target="#LogModal">Đăng nhập</a>
-                </li>			 					 	
-                <li>
-                    <a title="sign up" data-toggle="modal" data-target="#RegModal">Đăng ký</a>
-                </li>
+
+
+                <c:choose>
+                    <c:when test="${not empty sessionScope.login}">
+                        <!-- Thong tin member -->
+                        <span style="color: #fff;line-height: 50px">Xin chào ${sessionScope.login}</span>
+                        <li>
+                            <a class="member" href="" title="" id="dropdownMenuMember" aria-expanded="false" data-toggle="dropdown">
+                                <span class="tiny rounded avatar">
+                                    <img width="40" height="40" alt="" src="images/avatar/default/avatarDefault.jpg">
+                                </span>
+                            </a>                                                         
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                            <a title="login" data-toggle="modal" data-target="#LogModal">Đăng nhập</a>
+                        </li>			 					 	
+                        <li>
+                            <a title="sign up" data-toggle="modal" data-target="#RegModal">Đăng ký</a>
+                        </li> 
+                    </c:otherwise>
+                </c:choose>  
             </ul>				
         </div>	
         <!--E:membertools-->					
